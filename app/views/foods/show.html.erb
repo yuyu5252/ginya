@@ -1,0 +1,11 @@
+<h1>吟家お知らせ</h1>
+<h3>詳細</h3>
+<div class="food">
+  <p><%= @food.date %></p>
+  <p><%= @food.title %></p>
+  <p><%= @food.photo %></p>
+  <p><%= @food.about %></p>
+</div>
+
+<%= link_to "Tweet一覧に戻る", foods_path %>
+<%= link_to "編集する", edit_food_path(@food.id) %>
