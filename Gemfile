@@ -63,3 +63,8 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'dotenv-rails'
+
+gem 'cloudinary'
+gem 'activestorage-cloudinary-service'

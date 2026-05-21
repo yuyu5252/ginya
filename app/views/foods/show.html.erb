@@ -3,7 +3,9 @@
 <div class="food">
   <p><%= @food.date %></p>
   <p><%= @food.title %></p>
-  <p><%= @food.photo %></p>
+  <% if t.image.attached? %>
+    <p><%= image_tag t.image, size: '250x200'%></p>
+  <% end %>
   <p><%= @food.about %></p>
 </div>
 
