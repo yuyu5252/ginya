@@ -1,0 +1,45 @@
+.top-slider {
+  width: 100%;
+  height: 400px; // スライダー全体の高さ
+  margin-bottom: 30px;
+
+  .swiper-slide {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // ▽ 黒いぽちぽちの色を、お好みの「黒」に上書きする設定 ▽
+  .swiper-pagination-bullet-active {
+    background: #000000 !important; // 真っ黒
+  }
+  .swiper-pagination-bullet {
+    background: #000000; // 普段のぽちぽちも薄い黒（Swiperの標準で半透明になります）
+  }
+}
+
+.foods-container {
+  width: 50%;
+  margin: 10px auto;
+}
+h3 {
+  width: 120px;
+  margin: 30px auto;
+  text-align: center;
+}
+.food {
+  border-top: 9px solid #c1ae57;
+  margin-top: 10px;
+  padding-top: 20px;
+}
+.main-box {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.left-container {
+  display: flex;
+  justify-content: flex-end;
+}

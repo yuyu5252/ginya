@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Ginya" %></title>
+    <title>季節の手料理屋　吟家</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -18,6 +18,20 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>季節の手料理屋　吟家</h1>
+      <div class="header-list">
+      <ul>
+        <li><%= link_to "ホーム", foods_path %></li>
+        <li><%= link_to "新規投稿",new_food_path %></li>
+      </ul>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer>
+      <p>Copyright © GeekSalon All Rights Reserved.</p>
+    </footer>
   </body>
 </html>
