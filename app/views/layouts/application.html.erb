@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>季節の手料理屋　吟家</title>
+    <title>季節の手料理屋 吟家</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yuji+Boku&display=swap" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -19,7 +24,7 @@
 
   <body>
     <header>
-      <h1>季節の手料理屋　吟家</h1>
+      <h1>季節の手料理屋 吟家</h1>
       <div class="header-list">
       <ul>
         <li><%= link_to "ホーム", foods_path %></li>
@@ -27,11 +32,51 @@
       </ul>
       </div>
     </header>
+
     <main>
       <%= yield %>
+
+      <div class="access-section">
+        <div class="access-container">
+          
+          <div class="access-info">
+            <h3 class="access-shop-name">季節の手料理屋 吟家</h3>
+            <p class="access-text"><span>【住所】東京都世田谷区池尻 3-13-2 秀和ハウス1F</p>
+            <p class="access-text"><span>【交通アクセス】東急田園都市線「池尻大橋駅」西口 徒歩10分</p>
+            <p class="access-text"><span>【電話】050-5593-3031</p>
+            <p class="access-text"><span>【営業時間】<br>火・水・木・金・土<br>18:00 〜 25:00（L.O. 料理24:00 ドリンク24:30）<br>日・祝日<br>18:00 〜 23:00（L.O. 料理22:00 ドリンク22:30）</p>
+            <p class="access-text"><span>【定休日】月曜日</p>
+          </div>
+
+          <div class="access-map" style="flex: 1; min-width: 300px; max-width: 500px; height: 300px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.0817682812885!2d139.6781973!3d35.650357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018f4a779315555%3A0xedff276cab56adf8!2z5ZCf5a62!5e0!3m2!1sja!2sjp!4v1781167214922!5m2!1sja!2sjp" width="500" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="black-footer-bar">
+        <div class="footer-bar-container">
+          
+          <div class="footer-bar-logo">
+            季節の手料理屋 吟家
+          </div>
+
+          <ul class="footer-bar-menu">
+            <li><%= link_to "ホーム", root_path %></li>
+            <li><%= link_to "吟家について", about_path %></li>
+            <li><%= link_to "おしながき", dishes_list_path %></li>
+            <li><%= link_to "お知らせ一覧", news_list_path %></li>
+          </ul>
+
+          <div class="footer-bar-copyright">
+            © 2026 季節の手料理屋 吟家 All Rights Reserved.
+          </div>
+
+        </div>
+      </div>
     </main>
-    <footer>
-      <p>Copyright © GeekSalon All Rights Reserved.</p>
-    </footer>
+
   </body>
+
 </html>

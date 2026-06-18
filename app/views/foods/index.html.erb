@@ -1,38 +1,139 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <%= stylesheet_link_tag 'index', :media => "all" %>
 
 <div class="swiper top-slider">
   <div class="swiper-wrapper">
     <div class="swiper-slide"><%= image_tag 'top1.jpeg', alt: "トップ画像1" %></div>
     <div class="swiper-slide"><%= image_tag 'top2.jpeg', alt: "トップ画像2" %></div>
-    <div class="swiper-slide"><%= image_tag 'top3.jpeg', alt: "トップ画像3" %></div>
-    <div class="swiper-slide"><%= image_tag 'top4.jpeg', alt: "トップ画像4" %></div>
-    <div class="swiper-slide"><%= image_tag 'top5.jpeg', alt: "トップ画像5" %></div>
-    <div class="swiper-slide"><%= image_tag 'top6.jpeg', alt: "トップ画像6" %></div>
-    <div class="swiper-slide"><%= image_tag 'top7.jpeg', alt: "トップ画像7" %></div>
     <div class="swiper-slide"><%= image_tag 'top8.jpeg', alt: "トップ画像8" %></div>
   </div>
   
   <div class="swiper-pagination"></div>
 </div>
 
+<script>
+  document.addEventListener("turbo:load", () => {
+    if (document.querySelector(".top-slider")) {
+      const swiper = new Swiper('.top-slider', {
+        loop: true,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        speed: 500, 
+      });
+    }
+  });
+</script>
+
+<div class="shop-introduction">
+  <h2 class="intro-title">池尻にある<br>大人の隠れ家</h2>
+  
+  <p class="intro-subtitle">
+    
+  </p>
+
+  <div class="intro-text-box">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    
+    <p class="margin-top-md"></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+  </div>
+
+  <div class="intro-button-area">
+    <%= link_to about_path, class: "btn-outline" do %>
+      吟家について <span class="arrow">＞</span>
+    <% end %>
+  </div>
+</div>
+
 <div class="foods-container">
-<h3>お知らせ一覧</h3>
-  <% @foods.each do |t| %>
-    <div class="food">
-      <div class="main-box">
-        <div class="left-container"><%= t.title %></div>
-        <% if t.image.attached? %>
-        <div class="left-container"><%= image_tag t.image, size: '250x200'%></div>
+
+  <div class="dishes-header">
+    <h2 class="dishes-title">お料理</h2>
+    <p class="dishes-subtitle">DISHES</p>
+  </div>
+
+  <p class="intro-subtitle">
+    
+  </p>
+
+  <div class="intro-text-box">
+    <p>季節の食材を丁寧に仕上げております。旬の逸品をご堪能ください。</p>
+    <p></p>
+    <p></p>
+    <p></p>
+    
+    <p class="margin-top-md"></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+  </div>
+
+  <div class="news-more-btn-container" style="margin-top: 30px; margin-bottom: 60px;">
+    <%= link_to dishes_list_path, class: "news-more-link" do %>
+      おしながき <span class="arrow">＞</span>
+    <% end %>
+  </div>
+
+  <div class="dishes-photo-slider">
+  <div class="slider-track">
+
+    <ul class="slider-images">
+      <li><%= image_tag "top3.jpeg", alt: "お料理画像3" %></li>
+      <li><%= image_tag "top4.jpeg", alt: "お料理画像4" %></li>
+      <li><%= image_tag "top5.jpeg", alt: "お料理画像5" %></li>
+      <li><%= image_tag "top6.jpeg", alt: "お料理画像6" %></li>
+      <li><%= image_tag "top7.jpeg", alt: "お料理画像7" %></li>
+    </ul>
+
+    <ul class="slider-images">
+      <li><%= image_tag "top3.jpeg", alt: "お料理画像3" %></li>
+      <li><%= image_tag "top4.jpeg", alt: "お料理画像4" %></li>
+      <li><%= image_tag "top5.jpeg", alt: "お料理画像5" %></li>
+      <li><%= image_tag "top6.jpeg", alt: "お料理画像6" %></li>
+      <li><%= image_tag "top7.jpeg", alt: "お料理画像7" %></li>
+    </ul>
+
+  </div>
+</div>
+
+  <div class="news-header" style="margin-top: 120px;">
+    <h2 class="news-title">お知らせ</h2>
+    <p class="news-subtitle">NEWS</p>
+  </div>
+
+  <ul class="news-list">
+    <% @foods.each do |food| %>
+      <li class="news-item">
+        <%= link_to food_path(food), class: "news-link" do %>
+          <span class="news-date"><%= food.created_at.strftime('%Y.%m.%d') %></span>
+          
+          <span class="news-item-title"><%= food.title %></span>
         <% end %>
-        <div class="right-container">
-          <%= link_to "詳細へ", food_path(t.id) %>
-          <%= link_to "編集する", edit_food_path(t.id) %>
-          <%= button_to "削除する", food_path(t.id), method: :delete %>
-        </div>
-      </div>
-        <p class="left-container"><%= t.date %></p>
-    </div>
-  <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="news-more-btn-container">
+    <%= link_to news_list_path, class: "news-more-link" do %>
+      お知らせ一覧へ <span class="arrow">＞</span>
+    <% end %>
+  </div>
 </div>

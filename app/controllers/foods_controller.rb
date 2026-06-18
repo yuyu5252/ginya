@@ -1,7 +1,22 @@
 class FoodsController < ApplicationController
 
     def index
-        @foods = Food.all
+        @foods = Food.all.order(created_at: :desc)
+    end
+
+    def about
+    end
+
+    def show
+        @food = Food.find(params[:id])
+    end
+
+    def news_list
+        @foods = Food.all.order(created_at: :desc)
+    end
+
+    def dishes_list
+        @dishes = Food.all.order(created_at: :desc) 
     end
 
     def new

@@ -1,13 +1,43 @@
-<h1>吟家お知らせ</h1>
-<h3>詳細</h3>
-<div class="food">
-  <p><%= @food.date %></p>
-  <p><%= @food.title %></p>
-  <% if t.image.attached? %>
-    <p><%= image_tag t.image, size: '250x200'%></p>
-  <% end %>
-  <p><%= @food.about %></p>
-</div>
+<%= stylesheet_link_tag 'index', :media => "all" %>
 
-<%= link_to "Tweet一覧に戻る", foods_path %>
-<%= link_to "編集する", edit_food_path(@food.id) %>
+<div class="foods-container">
+  <!-- 戻るリンク -->
+  <div style="margin-bottom: 30px;">
+    <%= link_to "← トップページへ戻る", root_path, style: "color: #888; text-decoration: none; font-size: 14px;" %>
+  </div>
+
+  <article class="news-detail" style="font-family: 'Yu Mincho', serif; color: #333;">
+    <!-- 投稿された日付 -->
+    <p class="news-date" style="color: #777; font-size: 14px; margin-bottom: 10px;">
+      <%= @food.created_at.strftime('%Y.%m.%d') %>
+    </p>
+    
+    <!-- 投稿されたタイトル -->
+    <h1 class="news-title" style="font-size: 26px; font-weight: normal; line-height: 1.4; border-bottom: 1px solid #ddd; padding-bottom: 20px; margin-bottom: 30px;">
+      <%= @food.title %>
+    </h1>
+
+    <!-- 投稿された画像がある場合はここに表示 -->
+    <% if @food.image.attached? %>
+      <div class="news-image" style="margin-bottom: 30px; text-align: center;">
+        <%= image_tag @food.image, size: '400x300', style: "object-fit: cover; max-width: 100%;" %>
+      </div>
+    <% end %>
+
+    <!-- 投稿された本文（「about」または「content」） -->
+    <div class="news-content" style="font-size: 16px; line-height: 2; letter-spacing: 0.05em; white-space: pre-wrap; margin-bottom: 50px;">
+      <%= @food.about %>
+    </div>
+
+    <div class="news-more-btn-container" style="margin-top: 40px; margin-bottom: 40px;">
+      <%= link_to news_list_path, class: "news-more-link" do %>
+        お知らせ一覧へ <span class="arrow">＞</span>
+      <% end %>
+    </div>
+
+    <!-- 管理用の「編集する」ボタン（すっきりしたデザインにしています） -->
+    <div style="border-top: 1px dashed #ddd; padding-top: 20px; text-align: right;">
+      <%= link_to "この記事を編集する", edit_food_path(@food.id), style: "color: #999; font-size: 13px; text-decoration: none; border: 1px solid #ccc; padding: 5px 15px; border-radius: 4px;" %>
+    </div>
+  </article>
+</div>
