@@ -1,0 +1,130 @@
+/* ========================================================
+   「吟家について」ページ専用スタイル（about.scss）
+========================================================= */
+
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 150px 20px 100px 20px; /* ヘッダーに被らないよう上部に120pxあけています */
+  font-family: "Yu Mincho", "MS Mincho", serif;
+  color: #333;
+}
+
+/* ページの見出し（親玉） */
+.about-page-title {
+  text-align: center;
+  font-weight: 300; 
+  font-size: 26px;
+  color: #1a1a1a;
+  letter-spacing: 0.1em;
+  
+  /* 💡 サブタイトルを下に並べるためにflex（縦並び）にします */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;         /* 💡 メインタイトルとサブタイトルの間のすき間 */
+  margin-bottom: 80px;
+}
+
+/* 💡 【新設】英語のサブタイトルのスタイル */
+.about-page-subtitle {
+  font-size: 13px;       /* 小さめに設定して上品さを演出 */
+  font-weight: 400;      /* 少しハッキリ見える太さ */
+  color: #999;           /* ほんのり薄いグレーにして主役（日本語）を引き立てる */
+  letter-spacing: 0.25em; /* 💡 文字の間隔を広げることで、一気にプロっぽい高級感が出ます */
+  text-transform: uppercase; /* 万が一小文字で書いても自動で大文字にしてくれるお守り */
+}
+
+/* 各項目の外枠（縦の並び） */
+.concept-list {
+  display: flex;
+  flex-direction: column;
+  gap: 100px; /* 各こだわりセクション同士の縦の間隔 */
+}
+
+/* こだわりアイテム1つ分の基本設定 */
+.concept-item {
+  display: flex;
+  align-items: center; /* 写真とテキストの縦の中心線を揃える */
+  justify-content: space-between;
+  gap: 50px; /* 写真とテキストの間のすき間 */
+  width: 100%;
+
+  /* 💡 【今回の主役】偶数番目（2番目、4番目）のアイテムだけ、左右を反転させる */
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+/* 写真の箱 */
+.concept-image {
+  flex: 1; /* 左右均等な幅にする */
+  max-width: 500px;
+  height: 350px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* ほんのり上品な影 */
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 写真を歪ませずに綺麗にトリミング */
+    display: block;
+    transition: transform 0.5s ease;
+
+    &:hover {
+      transform: scale(1.03); /* マウスをのせると静かに少し拡大する演出 */
+    }
+  }
+}
+
+/* テキストの箱 */
+.concept-text {
+  flex: 1; /* 左右均等な幅にする */
+  padding: 0 10px;
+}
+
+/* こだわりのタイトル */
+.concept-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+  letter-spacing: 0.05em;
+}
+
+/* こだわりの説明文 */
+.concept-description {
+  font-size: 15px;
+  line-height: 2; /* 行間を広めにして和風の上品さを演出 */
+  color: #555;
+  text-align: justify; /* 両端揃えできれいな文章ブロックにする */
+}
+
+/* ========================================================
+   📱 スマホ・タブレット画面へのレスポンシブ対応
+========================================================= */
+@media (max-width: 768px) {
+  .concept-list {
+    gap: 60px;
+  }
+
+  .concept-item {
+    flex-direction: column !important; /* スマホの時は反転を解除して、全部「上写真・下文字」の縦1列にする */
+    gap: 25px;
+  }
+
+  .concept-image {
+    max-width: 100%;
+    height: 250px; /* スマホに合わせて写真の高さをスリムに */
+  }
+
+  .concept-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .concept-description {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+}

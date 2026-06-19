@@ -23,13 +23,29 @@
   </head>
 
   <body>
-    <header>
-      <h1>季節の手料理屋 吟家</h1>
-      <div class="header-list">
-      <ul>
-        <li><%= link_to "ホーム", foods_path %></li>
-        <li><%= link_to "新規投稿",new_food_path %></li>
-      </ul>
+
+    <header class="header">
+      <div class="header-container">
+        <h1 class="header-logo">吟家</h1>
+
+        <ul class="nav-links">
+          <li><%= link_to t('header.home'), root_path %></li>
+          <li><%= link_to t('header.about'), about_path %></li>
+          <li><%= link_to t('header.menu'), dishes_list_path %></li>
+          <li><%= link_to t('header.news'), news_list_path %></li>
+          
+          <li><%= link_to t('header.reserve'), "https://l.instagram.com/?u=https%3A%2F%2Fres-reserve.com%2Fja%2Frestaurants%2Fginyamishuku&e=AUDwHLicpddAoYuTEuXBcAEYPqq7bSA3Qpg8diDMjiytN5buOoe2agI6EOCv4GWMEX92vGB_YEag3rFcb_Cs9he1a9wb7e1Ttme4g7Kf5G9mIg6op-I1e6LA_Jv1JbgPAZrQFnT_75TKM2zoakPzmL8Utvw", class: "btn-reserve" %></li>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-btn" type="button">
+              Language <span class="arrow"></span>
+            </button>
+            
+            <ul class="lang-menu">
+              <li><a href="?locale=ja" class="active">日本語</a></li>
+              <li><a href="?locale=en">English</a></li>
+            </ul>
+          </div>
+        </ul>
       </div>
     </header>
 
@@ -44,7 +60,7 @@
             <p class="access-text"><span>【住所】東京都世田谷区池尻 3-13-2 秀和ハウス1F</p>
             <p class="access-text"><span>【交通アクセス】東急田園都市線「池尻大橋駅」西口 徒歩10分</p>
             <p class="access-text"><span>【電話】050-5593-3031</p>
-            <p class="access-text"><span>【営業時間】<br>火・水・木・金・土<br>18:00 〜 25:00（L.O. 料理24:00 ドリンク24:30）<br>日・祝日<br>18:00 〜 23:00（L.O. 料理22:00 ドリンク22:30）</p>
+            <p class="access-text"><span>【営業時間】<br>火・水・木・金・土<br>18:00 〜 25:00（L.O. 料理24:00 ドリンク24:30）<br>日・祝日<br>18:00 〜 23:00（L.O. 料理22:00 ドリンク22:30）<br>ランチ〈日曜限定〉<br>12:00〜14:00（L.O.13:30）</p>
             <p class="access-text"><span>【定休日】月曜日</p>
           </div>
 
@@ -70,8 +86,7 @@
           </ul>
 
           <div class="footer-bar-copyright">
-            © 2026 季節の手料理屋 吟家 All Rights Reserved.
-          </div>
+            <%= link_to "© 2026 吟家. All Rights Reserved.", new_food_path, class: "hidden-admin-link" %>          </div>
 
         </div>
       </div>

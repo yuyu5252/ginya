@@ -1,43 +1,38 @@
 <%= stylesheet_link_tag 'index', :media => "all" %>
 
 <div class="foods-container">
-  <!-- 戻るリンク -->
-  <div style="margin-bottom: 30px;">
-    <%= link_to "← トップページへ戻る", root_path, style: "color: #888; text-decoration: none; font-size: 14px;" %>
+  <div class="back-to-top">
+    <%= link_to "← トップページへ戻る", root_path %>
   </div>
 
-  <article class="news-detail" style="font-family: 'Yu Mincho', serif; color: #333;">
-    <!-- 投稿された日付 -->
-    <p class="news-date" style="color: #777; font-size: 14px; margin-bottom: 10px;">
+  <article class="news-detail">
+    <p class="news-date">
       <%= @food.created_at.strftime('%Y.%m.%d') %>
     </p>
-    
-    <!-- 投稿されたタイトル -->
-    <h1 class="news-title" style="font-size: 26px; font-weight: normal; line-height: 1.4; border-bottom: 1px solid #ddd; padding-bottom: 20px; margin-bottom: 30px;">
+
+    <h1 class="news-title">
       <%= @food.title %>
     </h1>
 
-    <!-- 投稿された画像がある場合はここに表示 -->
     <% if @food.image.attached? %>
-      <div class="news-image" style="margin-bottom: 30px; text-align: center;">
-        <%= image_tag @food.image, size: '400x300', style: "object-fit: cover; max-width: 100%;" %>
+      <div class="news-image">
+        <%= image_tag @food.image %>
       </div>
     <% end %>
 
-    <!-- 投稿された本文（「about」または「content」） -->
-    <div class="news-content" style="font-size: 16px; line-height: 2; letter-spacing: 0.05em; white-space: pre-wrap; margin-bottom: 50px;">
+    <div class="news-content">
       <%= @food.about %>
     </div>
 
-    <div class="news-more-btn-container" style="margin-top: 40px; margin-bottom: 40px;">
+    <div class="news-more-btn-container">
       <%= link_to news_list_path, class: "news-more-link" do %>
         お知らせ一覧へ <span class="arrow">＞</span>
       <% end %>
     </div>
 
-    <!-- 管理用の「編集する」ボタン（すっきりしたデザインにしています） -->
-    <div style="border-top: 1px dashed #ddd; padding-top: 20px; text-align: right;">
-      <%= link_to "この記事を編集する", edit_food_path(@food.id), style: "color: #999; font-size: 13px; text-decoration: none; border: 1px solid #ccc; padding: 5px 15px; border-radius: 4px;" %>
+    <div class="admin-actions">
+      <%= link_to "この記事を編集する", edit_food_path(@food.id), class: "admin-btn edit-btn" %>
+      <%= link_to "この投稿を削除する", food_path(@food), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "admin-btn delete-btn" %>
     </div>
   </article>
 </div>

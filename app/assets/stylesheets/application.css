@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+  require about
+  require dishes_list
+  require news_list
+  require show
 
  * {
   padding: 0;
@@ -22,36 +26,195 @@ body {
   font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
     Meiryo, "ＭＳ Ｐゴシック", sans-serif;
 }
-header {
+
+
+/* ========================================================
+   ヘッダー全体のレイアウト調整（最終版）
+========================================================= */
+
+.header {
   background-color: #000000;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   height: 80px;
-  font-weight: bold;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: nowrap; /* 狭くなったら折り返さないおまじない */
 }
-header a {
-  color: white; 
-  text-decoration: none; 
+
+/* 店の名前 */
+.header-logo {
+  font-size: 24px;
+  font-weight: bold;
+  font: "Zen Antique" !important;
+  margin: 0;
+  flex-shrink: 0;
 }
-header h1 {
-  color: white;
-  margin-left: 20px;
-  font-family: "Yuji Boku", serif;
-  font-weight: normal;
-  /* // 文字の間隔を少しあけるとより綺麗に見えます */
-  letter-spacing: 0.05em; 
-}
-.header-list {
+
+/* ナビゲーションメニュー（予約・言語も含む） */
+.nav-links {
   display: flex;
   align-items: center;
-}
-header ul {
-  display: flex;
-}
-header li {
   list-style: none;
-  margin-right: 40px;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;  /* メニューが多くても折り返さない */
+  gap: 24px;   /* PC時の広めのすき間 */
+
+  li {
+    display: flex;
+    align-items: center;
+  }
+
+  a, .lang-btn {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px; /* 文字サイズを少しだけ上品に */
+    white-space: nowrap; /* 文字の途中での変な改行を防止 */
+  }
+
+  /* ========================================================
+   お品書きデザインに合わせる：言語切り替えドロップダウン
+  ========================================================= */
+  .lang-dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: 'Yu Mincho', serif; /* 吟家の上品な雰囲気に合わせて */
+
+    /* 💡 お手本1枚目の「Language ∨」ボタンの再現 */
+    .lang-btn {
+      background-color: #fff;       /* お手本通りの白背景 */
+      color: #000000;               /* お手本のような落ち着いた上品な赤茶色 */
+      padding: 8px 24px;            /* 綺麗な横長丸みを作るための余白 */
+      border: none;
+      border-radius: 20px;          /* 💡 お手本のような完全なカプセル型へ */
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;                     /* 文字と矢印の間のすき間 */
+      transition: background-color 0.3s ease;
+
+      &:hover, &.is-active {
+        .lang-menu {
+          display: block !important; /* JSでの制御を優先させて確実に表示 */
+        }
+        .lang-btn .arrow {
+          transform: translateY(1px) rotate(-135deg) !important; /* 矢印を上向きに */
+        }
+      }
+
+      /* 💡 お手本の「∨」矢印マークの再現 */
+      .arrow {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-right: 2px solid #000000;
+        border-bottom: 2px solid #000000;
+        transform: translateY(-2px) rotate(45deg); /* 下向きの綺麗なくの字 */
+        transition: transform 0.3s ease;
+      }
+    }
+
+    /* 💡 お手本2枚目の「開くメニュー」の再現 */
+    .lang-menu {
+      display: none;                /* 最初は隠しておきます */
+      position: absolute;
+      top: calc(100% + 5px);        /* ボタンの少し下に配置 */
+      right: 0;
+      background-color: #fff;
+      border-radius: 16px;          /* お手本通りの丸みのある四角 */
+      padding: 15px 0;              /* 上下のゆったりとした余白 */
+      min-width: 150px;             /* 横幅を少し広めに確保 */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* 高級感のある柔らかい影 */
+      list-style: none;
+      margin: 0;
+      z-index: 1010;                /* ヘッダーより手前に出す */
+
+      li {
+        a {
+          display: block;
+          padding: 10px 24px;
+          color: #999999;           /* 選択されていない文字は淡いグレー */
+          text-decoration: none;
+          font-size: 14px;
+          transition: all 0.2s ease;
+
+          /* 💡 お手本2枚目の「日本語（選択中）」の赤茶色 */
+          &.active {
+            color: #000000;
+            font-weight: bold;
+          }
+
+          &:hover:not(.active) {
+            color: #333;            /* ホバーした時は少し濃い文字に */
+            background-color: #f9f9f9;
+          }
+        }
+      }
+    }
+
+    /* 💡 マウスを乗せた時（またはクリックした時）にメニューをフワッと表示 */
+    &:hover {
+      .lang-menu {
+        display: block;
+        animation: fadeIn 0.2s ease forwards;
+      }
+      .lang-btn .arrow {
+        transform: translateY(1px) rotate(-135deg); /* 💡 マウスが乗ったら矢印を上向きに（お手本2枚目の再現） */
+      }
+    }
+  }
+
+  /* メニュー出現時のフワッとしたアニメーション */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ========================================================
+   💻 画面幅が狭くなってきたら、一列のままギュッと縮小する
+========================================================= */
+@media (max-width: 1100px) {
+  .header-logo {
+    font-size: 20px; /* 💡 店の名前を少し小さく */
+  }
+
+  .nav-links {
+    gap: 12px; /* 💡 メニュー同士の「すき間」をギュッと狭くして1列に収める */
+
+    a, .lang-btn {
+      font-size: 13px; /* 💡 文字サイズを13pxまで縮小 */
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .nav-links {
+    gap: 8px; /* 💡 さらに画面が狭くなったら限界まで詰める */
+
+    a, .lang-btn {
+      font-size: 11px; /* 💡 文字を11pxにして1列を死守 */
+    }
+    
+    .btn-reserve {
+      padding: 4px 8px; /* 予約ボタンの余白も少しスリムに */
+    }
+  }
 }
 
 .access-section {
@@ -200,3 +363,13 @@ header li {
   }
 }
 
+/* フッターの隠しリンク用CSS */
+.hidden-admin-link {
+  color: #777;           /* 周りの文字と同じ薄いグレーにする */
+  text-decoration: none; /* 💡 リンクの下線を消して、ただの文字に見せる */
+  cursor: default;       /* 💡 マウスを乗せても「指マーク」にせず矢印のままにする */
+  
+  &:hover {
+    color: #777;         /* マウスを乗せても色が変わらないようにする */
+  }
+}

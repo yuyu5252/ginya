@@ -39,18 +39,22 @@
   </p>
 
   <div class="intro-text-box">
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+    <p>木材の温もり溢れた</p>
+    <p>和モダン空間が広がる池尻の隠れ家—吟家。</p>
+    <p>大阪割烹料理店で修行を積んだ店主による</p>
+    <p>四季を彩るディナーアラカルトや</p>
+    <p>日曜限定ランチの和風ハヤシライスを</p>
+    <p>お楽しみください。</p>
+    <p>飲み口や産地の異なる</p>
+    <p>多彩な日本酒と共にどうぞ。</p>
     
     <p class="margin-top-md"></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+    <p>靴を脱いでリラックスできる</p>
+    <p>畳の掘りごたつ式L字カウンター９席を完備。</p>
+    <p>店主の手仕事を間近でご覧いただけます。</p>
+    <p>同僚との飲み会や</p>
+    <p>カップル、ご家族揃ってのお食事に</p>
+    <p>いかがでしょうか。</p>
   </div>
 
   <div class="intro-button-area">
@@ -72,8 +76,8 @@
   </p>
 
   <div class="intro-text-box">
-    <p>季節の食材を丁寧に仕上げております。旬の逸品をご堪能ください。</p>
-    <p></p>
+    <p>季節の食材を丁寧に仕上げております。</p>
+    <p>旬の逸品をご堪能ください。</p>
     <p></p>
     <p></p>
     
@@ -120,11 +124,10 @@
   </div>
 
   <ul class="news-list">
-    <% @foods.each do |food| %>
-      <li class="news-item">
+    <% @food.each do |food| %>
+      <li class="news-list-item">
         <%= link_to food_path(food), class: "news-link" do %>
           <span class="news-date"><%= food.created_at.strftime('%Y.%m.%d') %></span>
-          
           <span class="news-item-title"><%= food.title %></span>
         <% end %>
       </li>

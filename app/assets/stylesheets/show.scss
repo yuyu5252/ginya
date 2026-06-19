@@ -1,0 +1,148 @@
+/* ========================================================
+   お知らせ詳細ページ（show）専用スタイル
+========================================================= */
+
+.news-detail {
+  font-family: 'Yu Mincho', serif;
+  color: #333;
+  max-width: 800px; /* 読みやすいように中央の最大幅を制限 */
+  margin: 0 auto;
+  padding: 0 20px;
+
+  /* 上部：トップへ戻るリンクの隙間 */
+  .back-to-top {
+    margin-bottom: 30px;
+    a {
+      color: #888;
+      text-decoration: none;
+      font-size: 14px;
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+
+  /* 日付 */
+  .news-date {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  /* タイトル */
+  .news-title {
+    font-size: 26px;
+    font-weight: normal;
+    line-height: 1.4;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+
+  /* 💡 写真のブロック（重なり防止） */
+  /* 💡 写真のブロック（上下の切り取りを完全に防ぐ） */
+  .news-image {
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 30px !important;
+    margin-bottom: 40px !important; 
+    display: block !important;      
+    position: relative !important;  
+    
+    /* 💡 上下を無理やりカットしていた原因を解除します */
+    overflow: visible !important; 
+    height: auto !important;
+
+    img {
+      max-width: 100% !important;    /* 画面幅に自動で合わせる */
+      width: auto !important;
+      
+      /* 💡 ここが最重要！高さを固定せず、写真本来の比率を絶対に維持させます */
+      height: auto !important; 
+      max-height: 550px !important;  /* 縦長になりすぎない上限だけ決める */
+      
+      /* 💡 写真を切らずに全体を収める魔法の命令 */
+      object-fit: contain !important; 
+      
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important; 
+      display: inline-block !important; 
+    }
+  }
+
+ /* 💡 本文ブロック（写真の後ろに回り込むのを強制的に禁止する） */
+  .news-content {
+    font-size: 16px;
+    line-height: 2;      
+    letter-spacing: 0.05em;
+    white-space: pre-wrap; 
+    margin-bottom: 60px;
+    
+    /* 💡 ここが超重要！ */
+    display: block !important; 
+    clear: both !important;    /* 💡 上にある写真のあらゆる回り込み設定を強制解除 */
+    position: relative;        /* 💡 写真の影に隠れないように表に引き出す */
+    z-index: 1;
+  }
+
+  /* お知らせ一覧へ戻るボタン */
+  .news-more-btn-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+
+    .news-more-link {
+      display: inline-block;
+      padding: 12px 40px;
+      border: 1px solid #333;
+      border-radius: 30px;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #333;
+        color: #fff;
+      }
+      
+      .arrow {
+        margin-left: 5px;
+        font-size: 11px;
+      }
+    }
+  }
+
+  /* 管理者用ボタンのエリア */
+  .admin-actions {
+    border-top: 1px dashed #ddd;
+    padding-top: 20px;
+    text-align: right;
+    margin-top: 40px;
+
+    .admin-btn {
+      font-size: 13px;
+      text-decoration: none;
+      margin-left: 15px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .edit-btn {
+      color: #999;
+      border: 1px solid #ddd;
+      &:hover {
+        background-color: #f9f9f9;
+        color: #666;
+      }
+    }
+
+    .delete-btn {
+      color: #b33e3e;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

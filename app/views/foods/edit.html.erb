@@ -1,5 +1,29 @@
+<h1>吟家お知らせ</h1>
+<h3>投稿の編集</h3>
+
 <%= form_for @food do |f| %>
-  <%= f.label :about %>
-  <%= f.text_field :about, :size => 140 %> 
-  <%= f.submit "編集する" %>
+
+  <div class="field">
+    <%= f.label :日付 %>
+    <%= f.date_field :date, size: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :タイトル %>
+    <%= f.text_field :title, size: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :写真 %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :説明 %>
+    <%= f.text_area :about, size: 60 %>
+  </div>
+
+  <%= f.submit "更新する" %>
 <% end %>
+
+<%= link_to "一覧に戻る", foods_path %>
